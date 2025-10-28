@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level-Up Gamer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand logo" href="index.html"><img src="https://fbi.cults3d.com/uploaders/24128271/illustration-file/2cfe7f9e-5cee-4494-9b63-4e025faf1039/Honeyview_Honeyview_0.png" alt="Logo" class="logo-img"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comunidad.html">Comunidad</a></li>
+                    <li class="nav-item"><a class="nav-link" href="soporte.html">Soporte</a></li>
+                    <li class="nav-item"><a class="btn btn-success ms-2" href="logueo.html" id="nav-login-btn">Registro/Login</a></li>
+                    <li class="nav-item position-relative ms-2">
+                        <a class="nav-link" href="carrito.html">
+                            <i class="bi bi-cart3 fs-4"></i>
+                            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.8em;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+    // Muestra solo el perfil si el usuario está logueado
+    document.addEventListener('DOMContentLoaded', function() {
+        var loginBtn = document.getElementById('nav-login-btn');
+        var registroBtn = document.querySelector('.btn.btn-success.ms-2[href="logueo.html"]');
+        var user = localStorage.getItem('usuarioActivoLevelUp');
+        if (loginBtn) {
+            if (user) {
+                var nav = loginBtn.parentElement;
+                var userLi = document.createElement('li');
+                userLi.className = 'nav-item ms-2';
+                userLi.innerHTML = `<a class="nav-link text-info" href="perfil.html"><i class="bi bi-person-circle"></i> ${user}</a>`;
+                nav.replaceChild(userLi, loginBtn);
+                if (registroBtn) registroBtn.style.display = 'none';
+            } else {
+                loginBtn.style.display = '';
+                if (registroBtn) registroBtn.style.display = '';
+            }
+        }
+    });
+    </script>
+        </div>
+    </nav>
+
+    <div class="container mt-4" id="productoDetalle"></div>
+    <script src="producto_data.js"></script>
+    <script>
+    function getParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+    function agregarAlCarrito(prod) {
+        let carrito = JSON.parse(localStorage.getItem('carritoLevelUp') || '[]');
+        const existente = carrito.find(p => p.id === prod.id);
+        if (existente) {
+            existente.qty += 1;
+        } else {
+            carrito.push({
+                id: prod.id,
+                name: prod.nombre,
+                price: prod.precio,
+                img: prod.img,
+                qty: 1
+            });
+        }
+        localStorage.setItem('carritoLevelUp', JSON.stringify(carrito));
+        if (window.actualizarBurbujaCarrito) window.actualizarBurbujaCarrito();
+        // Opcional: redirigir al carrito o mostrar mensaje
+        // window.location.href = 'carrito.html';
+        alert('Producto agregado al carrito');
+    }
+    function renderProducto() {
+        const id = parseInt(getParam('id'));
+        const prod = productosLevelUp.find(p => p.id === id);
+        const cont = document.getElementById('productoDetalle');
+        if(!prod) {
+            cont.innerHTML = '<div class="alert alert-danger">Producto no encontrado</div>';
+            return;
+        }
+        cont.innerHTML = `
+        <div class="row">
+            <div class="col-md-6">
+                <img src="${prod.img}" class="img-fluid rounded" alt="${prod.nombre}">
+            </div>
+            <div class="col-md-6">
+                <h2>${prod.nombre}</h2>
+                <p class="text-success fs-3">${prod.precioTexto}</p>
+                <p>${prod.descripcion}</p>
+                <div class="d-grid gap-2">
+                    <button id="btn-agregar-carrito" class="btn btn-success btn-lg">Agregar al carrito</button>
+                    <button class="btn btn-outline-light">Seguir comprando</button>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Origen y Garantía</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Fabricante:</strong> ${prod.fabricante}</p>
+                        <p><strong>Procedencia:</strong> ${prod.procedencia}</p>
+                        <p><strong>Distribuidor:</strong> ${prod.distribuidor}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Garantía:</strong> ${prod.garantia}</p>
+                        <p><strong>Autenticidad:</strong> ${prod.autenticidad}</p>
+                        <p><strong>Stock:</strong> ${prod.stock}</p>
+                    </div>
+                </div>
+                <div class="alert alert-success mt-3">
+                    <small>Todos nuestros productos son originales y cuentan con garantía del fabricante</small>
+                </div>
+            </div>
+        </div>
+        `;
+        // Agregar evento al botón
+        setTimeout(() => {
+            const btn = document.getElementById('btn-agregar-carrito');
+            if (btn) btn.addEventListener('click', function() { agregarAlCarrito(prod); });
+        }, 0);
+    }
+    document.addEventListener('DOMContentLoaded', renderProducto);
+    </script>
+
+    <div class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p>2025 Level-up Gamer - Todos los derechos reservados</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

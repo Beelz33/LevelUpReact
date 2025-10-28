@@ -1,0 +1,405 @@
+.perfil-card-warning {
+  background: var(--color-blanco) !important;
+  color: var(--color-azul-oscuro) !important;
+  border: 2px solid var(--color-amarillo) !important;
+}
+/* Estilos específicos para perfil.html */
+/* Inputs y selects del perfil con azul oscuro y acento verde */
+/* Unificación de colores de perfil con el resto del sitio */
+/* Colores de perfil igual que en index.html */
+.perfil-input {
+  background-color: #f5f5f5 !important;
+  color: var(--color-azul-oscuro) !important;
+  border: 1.5px solid var(--color-azul-medio) !important;
+  border-radius: 8px !important;
+  font-weight: 400;
+  font-size: 1.05em;
+  padding: 8px 12px !important;
+  margin-bottom: 10px;
+  box-shadow: none !important;
+}
+.perfil-historial-title {
+  color: var(--color-azul-oscuro);
+  letter-spacing: 1px;
+}
+.perfil-card {
+  background: var(--color-azul-claro) !important;
+  color: var(--color-azul-oscuro) !important;
+  border-radius: 12px !important;
+  border: 2px solid var(--color-azul-medio) !important;
+  box-shadow: none !important;
+  padding: 24px 24px 20px 24px !important;
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.perfil-card h4, .perfil-card h5, .perfil-card h6 {
+  color: var(--color-azul-oscuro) !important;
+  font-weight: bold;
+}
+.perfil-card p, .perfil-card small, .perfil-card label, .perfil-card li, .perfil-card span {
+  color: var(--color-azul-oscuro) !important;
+}
+.perfil-card .btn, .perfil-card .btn-sm, .perfil-card .btn-success {
+  background: transparent !important;
+  color: var(--color-azul-medio) !important;
+  border: 1.5px solid var(--color-azul-medio) !important;
+  border-radius: 8px !important;
+  font-weight: 500;
+  box-shadow: none !important;
+  padding: 6px 18px !important;
+  margin-top: 8px;
+}
+.perfil-card .btn:hover, .perfil-card .btn:focus {
+  background: var(--color-azul-medio) !important;
+  color: var(--color-blanco) !important;
+}
+.perfil-card-info {
+  border-color: var(--color-azul-claro) !important;
+}
+.perfil-card-success {
+  border-color: var(--color-verde) !important;
+}
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(90deg, var(--color-azul-medio) 60%, var(--color-amarillo) 100%);
+  color: var(--color-azul-oscuro);
+  font-weight: bold;
+  border-radius: 24px;
+  padding: 8px 22px 8px 16px;
+  margin-bottom: 12px;
+  font-size: 1.15em;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.08);
+  letter-spacing: 0.5px;
+  border: 2px solid var(--color-azul-medio);
+}
+.level-badge::before {
+  content: '\2605'; /* estrella */
+  color: var(--color-amarillo);
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+.puntos-badge {
+  display: inline-block;
+  background: var(--color-azul-medio);
+  color: var(--color-blanco);
+  font-weight: bold;
+  border-radius: 16px;
+  padding: 4px 14px;
+  margin-left: 8px;
+  font-size: 1em;
+  vertical-align: middle;
+}
+.perfil-canjear-btn {
+  background: var(--color-azul-medio);
+  color: var(--color-blanco);
+  border: none;
+  font-weight: bold;
+}
+.perfil-canjear-btn:hover {
+  background: var(--color-azul-oscuro);
+  color: var(--color-amarillo);
+}
+/* Color personalizado para recomendaciones en index */
+.recomendaciones-title {
+  color: var(--color-blanco) !important;
+}
+.btn-outline-recomendacion {
+  color: var(--color-blanco);
+  border: 2px solid var(--color-blanco);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline-recomendacion:hover {
+  background: var(--color-azul-oscuro);
+  color: #fff;
+}
+/* Logo navbar tamaño fijo */
+.logo-img {
+  max-height: 60px !important;
+  width: auto !important;
+  display: inline-block !important;
+  margin: 0 !important;
+}
+/* Cambia el color de las descripciones de productos en el catálogo */
+.product-description, .product-card .product-description, .card .product-description {
+  color: black !important; /* Cambia este color por el que prefieras */
+}
+:root {
+  --color-azul-oscuro: #1A237E;
+  --color-azul-medio: #3949AB;
+  --color-azul-claro: #E3E7F1;
+  --color-blanco: #FFFFFF;
+  --color-gris-claro: #F5F5F5;
+  --color-gris-oscuro: #212121;
+  --color-verde: #43A047;
+  --color-rojo: #D32F2F;
+  --color-amarillo: #FFD600;
+}
+
+body {
+  background-color: var(--color-gris-claro);
+  color: var(--color-azul-oscuro);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .logo, .card-title {
+  color: var(--color-azul-oscuro);
+}
+
+p, .card-text, .producto-tarjeta p {
+  color: var(--color-gris-oscuro);
+}
+
+/* Carrito de compras */
+.table-dark th, .table-dark td {
+    vertical-align: middle;
+}
+.table-dark img {
+    border-radius: 8px;
+}
+.qty-input {
+    width: 60px;
+    text-align: center;
+}
+/* Estilos de perfil y componentes generales */
+body {
+    background-color: #000;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+}
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    color: #39FF14;
+}
+.card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
+.level-badge {
+    background-color: #39FF14;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+/* Catálogo y componentes generales */
+.product-image {
+  width: 100%;
+  max-width: 260px;
+  height: 120px;
+  object-fit: contain;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Estilos para productos destacados en index.html */
+.productos-destacados-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+}
+.producto-tarjeta {
+    background: #181818;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    padding: 0 0 24px 0;
+    width: 300px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+}
+.producto-tarjeta:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+.producto-tarjeta img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    margin-top: 24px;
+    background: #222;
+    border-radius: 8px;
+    display: block;
+}
+.producto-tarjeta h5 {
+    margin: 18px 0 8px 0;
+    font-size: 1.3rem;
+    color: #fff;
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.producto-tarjeta p {
+    margin: 0 0 8px 0;
+    color: #4caf50;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.producto-tarjeta .btn {
+    margin-top: auto;
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.producto-tarjeta .btn:hover {
+    background: #1769aa;
+}
+@media (max-width: 1000px) {
+    .productos-destacados-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .producto-tarjeta {
+        width: 90vw;
+        max-width: 350px;
+    }
+}
+.product-image {
+  background: #ffffff; /* o el color que prefieras */
+  border-radius: 8px;
+  padding: 12px;
+}
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+    font-family: 'Press Start 2P', sans-serif;
+    color:#1A237E;
+}
+
+.btn-primary {
+    background-color: #1E90FF;
+    border-color: #1E90FF;
+}
+
+.btn-success {
+    background-color: #39FF14;
+    border-color: #39FF14;
+    color: #000;
+}
+
+.card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.navbar {
+    background-color: #111;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.category-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.product-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+body {
+  background-color: var(--color-gris-claro);
+  color: var(--color-azul-oscuro);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+header, .navbar {
+  background-color: var(--color-azul-oscuro) !important;
+}
+
+.navbar .navbar-brand.logo {
+  color: var(--color-blanco) !important;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+}
+
+.navbar-nav .nav-link,
+.navbar-nav .btn {
+  color: var(--color-blanco) !important;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:focus, .navbar-nav .nav-link:hover {
+  color: var(--color-amarillo) !important;
+}
+
+.btn-success, .btn-outline-success, .btn-primary, .btn, .btn-lg {
+  background-color: var(--color-azul-medio) !important;
+  border-color: var(--color-azul-medio) !important;
+  color: var(--color-blanco) !important;
+  font-weight: bold;
+}
+
+.btn-success:hover, .btn-outline-success:hover, .btn-primary:hover, .btn:hover, .btn-lg:hover {
+  background-color: var(--color-azul-oscuro) !important;
+  border-color: var(--color-azul-oscuro) !important;
+  color: var(--color-amarillo) !important;
+}
+
+.btn-outline-primary {
+  color: var(--color-azul-medio) !important;
+  border-color: var(--color-azul-medio) !important;
+  background-color: var(--color-blanco) !important;
+  font-weight: bold;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-azul-medio) !important;
+  color: var(--color-amarillo) !important;
+}
+
+.btn-outline-secondary {
+  color: var(--color-rojo) !important;
+  border-color: var(--color-rojo) !important;
+  background-color: var(--color-blanco) !important;
+  font-weight: bold;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--color-rojo) !important;
+  color: var(--color-blanco) !important;
+}
+
+footer, .bg-dark {
+  background-color: var(--color-azul-oscuro) !important;
+  color: var(--color-amarillo) !important;
+}
+
+.producto-tarjeta, .card {
+  background-color: var(--color-azul-claro);
+  color: var(--color-azul-oscuro);
+  border: 1px solid var(--color-azul-medio);
+}
+
+.producto-tarjeta h5, .card-title {
+  color: var(--color-azul-oscuro) !important;
+}
+
+.producto-tarjeta p, .card-text {
+  color: var(--color-azul-oscuro) !important;
+}
