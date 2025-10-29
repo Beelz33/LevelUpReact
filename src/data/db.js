@@ -1,6 +1,3 @@
-// Esta es nuestra base de datos simulada
-// 
-
 export const categories = [
   { id: 'juegos-mesa', name: 'Juegos de Mesa' },
   { id: 'accesorios', name: 'Accesorios' },

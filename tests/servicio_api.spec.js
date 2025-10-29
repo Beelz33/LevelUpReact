@@ -40,8 +40,4 @@ describe('Funciones de la API (api.js)', () => {
       // await expectAsync(getProductById(invalidId)).toBeRejectedWith('Producto no encontrado');
     });
   });
-
-  // (Aquí podrías añadir más bloques 'describe' para probar otras 
-  // funciones de api.js como getProducts, loginUser, etc.)
-
 });

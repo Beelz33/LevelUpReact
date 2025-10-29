@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// 1. Importa el hook 'useCart'
 import { useCart } from '../context/CartContext';
 
 function Carrito() {

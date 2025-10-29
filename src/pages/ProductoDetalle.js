@@ -28,8 +28,6 @@ function ProductoDetalle() {
     fetchProduct();
   }, [id]); 
 
-  // --- ¡AQUÍ ESTÁ LA SOLUCIÓN! ---
-
   // GUARDIA 1: Estado de Carga
   if (loading) {
     return (
@@ -43,7 +41,6 @@ function ProductoDetalle() {
   }
 
   // GUARDIA 2: Estado de Producto No Encontrado
-  // Esto se ejecuta DESPUÉS de que 'loading' es false.
   if (!producto) {
     return (
       <div className="container mt-5 text-center alert alert-danger">
@@ -54,12 +51,7 @@ function ProductoDetalle() {
     );
   }
 
-  // --- FIN DE LA SOLUCIÓN ---
 
-  // Si el código llega hasta aquí, significa que:
-  // 1. 'loading' es 'false'
-  // 2. 'producto' NO es 'null'
-  // Por lo tanto, es seguro leer 'producto.nombre'
 
   const handleAddToCart = () => {
     addToCart(producto);
@@ -73,7 +65,6 @@ function ProductoDetalle() {
           <img src={producto.img} className="img-fluid rounded" alt={producto.nombre} />
         </div>
         <div className="col-md-6">
-          {/* Ahora esto es seguro */}
           <h2>{producto.nombre}</h2> 
           <p className="text-success fs-3">{producto.precioTexto}</p>
           <p>{producto.descripcion}</p>
@@ -105,7 +96,6 @@ function ProductoDetalle() {
               <p><strong>Stock:</strong> {producto.stock}</p>
             </div>
           </div>
-          {/* ... (resto del JSX) ... */}
         </div>
       </div>
     </div>

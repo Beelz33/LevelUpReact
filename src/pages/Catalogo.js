@@ -31,9 +31,6 @@ function ProductoCard({ producto }) {
           <Link to={`/productos/${producto.id}`} className="btn btn-primary">
             Ver detalles
           </Link>
-
-          {/* Botón Agregar al carrito (la lógica se maneja en ProductoDetalle.js o contexto) */}
-          <button className="btn btn-success mt-2">Agregar al carrito</button>
         </div>
       </div>
     </div>

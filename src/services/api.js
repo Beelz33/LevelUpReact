@@ -4,7 +4,7 @@ import { products, categories, users } from '../data/db.js';
 export const getProducts = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(products); // <<<--- CÓDIGO REAL
+      resolve(products);
     }, 500);
   });
 };
@@ -14,7 +14,7 @@ export const getProductById = (id) => {
     setTimeout(() => {
       const product = products.find(p => p.id === parseInt(id));
       if (product) {
-        resolve(product); // <<<--- CÓDIGO REAL
+        resolve(product);
       } else {
         reject('Producto no encontrado');
       }
@@ -28,7 +28,9 @@ export const deleteProduct = (id) => {
       const productIndex = products.findIndex(p => p.id === parseInt(id));
       if (productIndex !== -1) {
         console.log("Simulando borrado del producto ID:", id);
-        resolve({ success: true, message: 'Producto eliminado (simulado)' }); // <<<--- CÓDIGO REAL
+        // En simulación, solo resolvemos. No modificamos el array importado directamente
+        // para evitar efectos secundarios si db.js se recarga.
+        resolve({ success: true, message: 'Producto eliminado (simulado)' });
       } else {
         reject('Producto no encontrado para eliminar');
       }
@@ -40,14 +42,16 @@ export const createProduct = (productData) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const newProduct = {
-        id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 100,
+        // Genera un ID más seguro que solo length + 100
+        id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
         ...productData,
         precio: parseFloat(productData.precio) || 0,
         stock: parseInt(productData.stock) || 0,
         precioTexto: `$${(parseFloat(productData.precio) || 0).toLocaleString('es-CL')} CLP`
       };
       console.log("Simulando creación del producto:", newProduct);
-      resolve(newProduct); // <<<--- CÓDIGO REAL
+      // No modificamos 'products' directamente en la simulación
+      resolve(newProduct);
     }, 500);
   });
 };
@@ -65,7 +69,8 @@ export const updateProduct = (id, productData) => {
           precioTexto: `$${(parseFloat(productData.precio) || 0).toLocaleString('es-CL')} CLP`
         };
         console.log("Simulando actualización del producto ID:", id, updatedProduct);
-        resolve(updatedProduct); // <<<--- CÓDIGO REAL
+        // No modificamos 'products' directamente en la simulación
+        resolve(updatedProduct);
       } else {
         reject('Producto no encontrado para actualizar');
       }
@@ -77,7 +82,7 @@ export const updateProduct = (id, productData) => {
 export const getCategories = () => {
    return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(categories); // <<<--- CÓDIGO REAL
+      resolve(categories);
     }, 200);
   });
 };
@@ -85,17 +90,27 @@ export const getCategories = () => {
 // --- Funciones de USUARIOS (Autenticación y CRUD Admin) ---
 export const loginUser = (email, password) => {
   return new Promise((resolve, reject) => {
+    // 👇 Logs para depurar 👇
+    console.log("Intentando login con:", { email, password });
+    console.log("Usuarios en DB para comparar:", users);
+
     setTimeout(() => {
+      // Busca el usuario que coincida EXACTAMENTE con email Y password
       const user = users.find(
         (u) => u.email === email && u.password === password
       );
+
+      console.log("Usuario encontrado después de find:", user); // <-- ¿Qué sale aquí?
+
       if (user) {
+        // Si lo encuentra, devuelve el usuario (sin contraseña)
         const { password, ...userWithoutPassword } = user;
-        resolve(userWithoutPassword); // <<<--- CÓDIGO REAL
+        resolve(userWithoutPassword);
       } else {
+        // Si no lo encuentra (user es undefined), rechaza
         reject('Credenciales incorrectas. Inténtalo de nuevo.');
       }
-    }, 1000);
+    }, 1000); // Simula espera de 1 segundo
   });
 };
 
@@ -112,8 +127,9 @@ export const registerUser = (userData) => {
           role: 'customer'
         };
         console.log("Usuario nuevo simulado:", newUser);
+        // No modificamos 'users' directamente
         const { password, ...userWithoutPassword } = newUser;
-        resolve(userWithoutPassword); // <<<--- CÓDIGO REAL
+        resolve(userWithoutPassword);
       }
     }, 1000);
   });
@@ -147,11 +163,12 @@ export const deleteUser = (id) => {
     setTimeout(() => {
       const userIndex = users.findIndex(u => u.id === parseInt(id));
       if (userIndex !== -1) {
-        if (users[userIndex].id === 1) {
+        if (users[userIndex].id === 1) { // Evita borrar admin ID 1
              reject('No se puede eliminar al administrador principal.');
              return;
         }
         console.log("Simulando borrado del usuario ID:", id);
+        // No modificamos 'users' directamente
         resolve({ success: true, message: 'Usuario eliminado (simulado)' });
       } else {
         reject('Usuario no encontrado para eliminar');
@@ -173,6 +190,7 @@ export const createUser = (userData) => {
           role: ['admin', 'customer'].includes(userData.role) ? userData.role : 'customer'
         };
         console.log("Simulando creación de usuario (admin):", newUser);
+        // No modificamos 'users' directamente
         const { password, ...userWithoutPassword } = newUser;
         resolve(userWithoutPassword);
       }
@@ -196,6 +214,7 @@ export const updateUser = (id, userData) => {
           role: ['admin', 'customer'].includes(userData.role) ? userData.role : users[userIndex].role
         };
         console.log("Simulando actualización de usuario (admin) ID:", id, updatedUser);
+        // No modificamos 'users' directamente
         const { password, ...userWithoutPassword } = updatedUser;
         resolve(userWithoutPassword);
       } else {
@@ -209,22 +228,20 @@ export const updateUser = (id, userData) => {
 export const getOrders = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      // Importa 'orders' aquí para asegurar que toma la versión actualizada
-      // si 'db.js' cambiara (aunque en nuestro caso es estático)
+      // Usamos require aquí para intentar obtener los datos más 'frescos'
+      // aunque en una simulación estática no es estrictamente necesario.
       const { orders } = require('../data/db.js');
-      resolve(orders);
-    }, 400); // Simula 0.4 segundos
+      resolve(orders || []); // Devuelve array vacío si 'orders' no existe
+    }, 400);
   });
 };
 
-/**
- * Devuelve una orden por su ID (simulado)
- */
 export const getOrderById = (id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const { orders } = require('../data/db.js');
-      const order = orders.find(o => o.id === parseInt(id));
+      // Asegurarse de que orders es un array antes de buscar
+      const order = Array.isArray(orders) ? orders.find(o => o.id === parseInt(id)) : undefined;
       if (order) {
         resolve(order);
       } else {
