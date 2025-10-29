@@ -74,7 +74,7 @@ module.exports = function(config) {
     autoWatch: true,
 
     // Navegadores (ya lo tenías configurado para Opera)
-    browsers: ['Opera'],
+    browsers: ['ChromeHeadless'], // Cambiado a ChromeHeadless para mayor compatibilidad
 
     // Ejecución única o continua
     singleRun: false, // Déjalo en false mientras escribes pruebas
